@@ -3,10 +3,12 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const passwordValidator = require('password-validator');
 
+// const Student = require("../../models/Student")
+
 const router = express.Router();
 
 exports.register = async (req, res) => {
-    const { name, email, college, phonenumber, password } = req.body;
+    const { name, email, rollnumber, phonenumber, password } = req.body;
     try {
         const user = await Student.findOne({email: email})
 
@@ -36,7 +38,7 @@ exports.register = async (req, res) => {
                 const salt = await bcrypt.genSaltSync(10);
                 let pass = await bcrypt.hash(password, salt);
                    
-                let newStudent = {name, email, college, phonenumber, pass};
+                let newStudent = {name, email, rollnumber, phonenumber, password:pass};
                 const customer = new Student(newStudent);
                 const data = await customer.save();
                 console.log(data);
