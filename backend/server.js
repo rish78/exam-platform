@@ -6,6 +6,7 @@ const app = express();
 const cors = require("cors");
 
 const student = require("./routes/student");
+const teacher = require("./routes/teacher");
 
 app.use(express.json());
 app.use(cors());
@@ -24,6 +25,7 @@ app.get("/", (req, res) => {
 })
 
 app.use("/student", student);
+app.used("/teacher", teacher);
 
 app.listen(port, () => {                                           //Inititating server
     console.log(`Here we go, Engines started at ${port}.`);
